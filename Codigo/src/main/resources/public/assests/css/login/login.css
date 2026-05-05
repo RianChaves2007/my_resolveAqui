@@ -1,0 +1,193 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #f0f2f5;
+}
+
+.page {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== LADO ESQUERDO ===== */
+.left-side {
+  flex: 0 0 46%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 36px 40px;
+  gap: 28px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-name {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1a2f6e;
+}
+
+.brand-name span { color: #00c853; }
+
+.hero-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero-img {
+  width: 100%;
+  max-width: 320px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.hero-caption {
+  font-size: 15px;
+  font-weight: 700;
+  color: #00c853;
+}
+
+.hero-caption-dark {
+  color: #1a2f6e;
+}
+
+/* ===== LADO DIREITO ===== */
+.right-side {
+  flex: 1;
+  background: #1a2f6e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.form-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+
+.form-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1a2f6e;
+  margin-bottom: 4px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+}
+
+.field-input {
+  width: 100%;
+  border: 1.5px solid #d0d5dd;
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 14px;
+  color: #111;
+  outline: none;
+  transition: border-color 0.18s;
+  background: #fff;
+}
+
+.field-input:focus { border-color: #1a2f6e; }
+.field-input::placeholder { color: #aaa; }
+
+.input-pw-wrap {
+  position: relative;
+}
+
+.input-pw-wrap .field-input {
+  padding-right: 44px;
+}
+
+.toggle-pw {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.forgot-link {
+  font-size: 12px;
+  color: #888;
+  text-decoration: underline;
+  text-align: right;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 13px;
+  background: #00c853;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.btn-primary:hover { background: #00b347; }
+
+.btn-secondary {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  color: #1a2f6e;
+  font-size: 15px;
+  font-weight: 700;
+  border: 2px solid #1a2f6e;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+
+.btn-secondary:hover { background: #1a2f6e; color: #fff; }
+
+.error-msg {
+  background: #fff0f0;
+  color: #c0392b;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@media (max-width: 680px) {
+  .page { flex-direction: column; }
+  .left-side { display: none; }
+  .right-side { min-height: 100vh; }
+}

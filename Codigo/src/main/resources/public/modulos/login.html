@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrar Resolve Aqui</title>
+  <link rel="stylesheet" href="../assests/css/login/login.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- LADO ESQUERDO -->
+  <div class="left-side">
+    <div class="brand">
+		<img src="/assests/img/icon.png" width="90" height="60" alt="Logo">	  
+		<span class="brand-name">Resolve Aqui</span>
+    </div>
+
+    <div class="hero-block">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&q=80" alt="Profissional">
+      <p class="hero-caption">Solicite serviços de qualidade</p>
+    </div>
+
+    <div class="hero-block">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&q=80" alt="Reunião">
+      <p class="hero-caption hero-caption-dark">Transforme um profissional</p>
+    </div>
+  </div>
+
+  <!-- LADO DIREITO -->
+  <div class="right-side">
+    <div class="form-card">
+        <h1 class="form-title">Entrar</h1>
+        <div id="error-msg" class="error-msg" style="display:none"></div>
+
+        <form id="formLogin">  <!-- sem onsubmit -->
+            <div class="field-group">
+                <label class="field-label">Login</label>
+                <input class="field-input" id="email" type="email" placeholder="Usuário" required>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Senha</label>
+                <input class="field-input" id="password" type="password" placeholder="Senha">
+            </div>
+            <button class="btn-primary" type="button" onclick="login(event)">Entrar</button>
+            <button class="btn-secondary" type="button" onclick="location.href='/modulos/cadastro.html'">Registrar-se</button>
+        </form>
+    </div>
+  </div>
+</div>
+<script src="/assests/js/auth/auth.js"></script>
+<script src="/assests/js/login/login.js"></script>
+</body>
+</html>

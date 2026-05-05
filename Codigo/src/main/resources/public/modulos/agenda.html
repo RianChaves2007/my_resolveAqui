@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda de Serviços — Resolve Aqui</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assests/css/agenda/agenda.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <svg class="nav-logo" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="22" cy="22" r="20" fill="#1b3a6a" stroke="#3a6aaa" stroke-width="2"/>
+    <path d="M13 22 L19 28 L31 16" stroke="#4da6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="22" cy="22" r="9" stroke="#4da6ff" stroke-width="1.5" fill="none" opacity="0.5"/>
+  </svg>
+
+  <div class="nav-breadcrumb">
+    <span onclick="location.href='index.html'">HOME</span>
+    <span class="sep">/</span>
+    <span onclick="location.href='portifolio.html'">PORTFÓLIO</span>
+    <span class="sep">/</span>
+    <span class="active">AGENDA DE SERVIÇOS</span>
+  </div>
+
+  <div class="nav-icons">
+    <button class="nav-icon" onclick="location.href='index.html'" title="Início"><i class="fa-solid fa-house"></i></button>
+    <button class="nav-icon" onclick="void(0)" title="Favoritos"><i class="fa-solid fa-heart"></i></button>
+    <button class="nav-icon" onclick="location.href='mensagens.html'" title="Mensagens"><i class="fa-solid fa-envelope"></i></button>
+    <button class="nav-icon" onclick="void(0)" title="Notificações"><i class="fa-solid fa-rotate"></i></button>
+    <button class="nav-icon" onclick="void(0)" title="Comunidade"><i class="fa-solid fa-user-group"></i></button>
+  </div>
+
+  <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMenu()" title="Menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="dropdown-menu" id="dropdown-menu">
+    <button class="nav-icon dropdown-item" onclick="location.href='index.html'"><i class="fa-solid fa-house"></i> Início</button>
+    <button class="nav-icon dropdown-item" onclick="location.href='portifolio.html'"><i class="fa-solid fa-id-card"></i> Portfólio</button>
+    <button class="nav-icon dropdown-item" onclick="location.href='mensagens.html'"><i class="fa-solid fa-envelope"></i> Mensagens</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="agenda-layout">
+
+    <!-- CALENDAR -->
+    <div class="calendar-section">
+      <div class="calendar-header">
+        <button class="cal-nav" id="prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+        <span class="cal-month-label" id="month-label">JULHO 2024</span>
+        <button class="cal-nav" id="next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+      <div class="calendar-weekdays">
+        <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+      </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+    </div>
+
+    <!-- EVENTS LIST -->
+    <div class="events-section">
+      <div class="events-header">
+        <span class="events-title"><i class="fa-solid fa-list-check"></i> SERVIÇOS MARCADOS</span>
+      </div>
+      <div class="events-list" id="events-list"></div>
+    </div>
+
+    <!-- CREATE EVENT FORM -->
+    <div class="form-section">
+      <div class="form-header">
+        <span class="form-title">CRIAR MARCAÇÃO DE SERVIÇO</span>
+        <button class="form-add-btn" id="open-form-btn"><i class="fa-solid fa-plus"></i></button>
+      </div>
+
+      <div class="form-body" id="form-body">
+        <div class="form-group">
+          <label>Título do Serviço</label>
+          <input type="text" id="f-title" placeholder="Título do Serviço" />
+        </div>
+        <div class="form-group">
+          <label>Cliente <span class="label-sub">(@)</span></label>
+          <input type="text" id="f-client" placeholder="Insert @ do cliente" />
+        </div>
+        <div class="form-group">
+          <label>Descrição do Serviço</label>
+          <textarea id="f-desc" placeholder="Descrição detalhada"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group half">
+            <label>Data</label>
+            <input type="date" id="f-date" />
+          </div>
+          <div class="form-group half">
+            <label>Horário de Início</label>
+            <input type="time" id="f-time" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group half">
+            <label>Duração (hh:mm)</label>
+            <input type="text" id="f-duration" placeholder="hh:mm" />
+          </div>
+          <div class="form-group half">
+            <label>Fim Previsto</label>
+            <input type="time" id="f-end" readonly placeholder="--:--" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nível de Importância</label>
+          <div class="level-picker" id="level-picker">
+            <button class="level-btn easy active" data-level="facil" type="button">Fácil</button>
+            <button class="level-btn medium" data-level="medio" type="button">Médio</button>
+            <button class="level-btn hard" data-level="dificil" type="button">Difícil</button>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-cancel" type="button" id="cancel-btn">CANCELAR</button>
+          <button class="btn-confirm" type="button" id="confirm-btn">CONFIRMAR MARCAÇÃO</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- EVENT DETAIL MODAL -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-level-badge" id="modal-level"></div>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <div class="modal-meta">
+        <span><i class="fa-solid fa-user"></i> <span id="modal-client"></span></span>
+        <span><i class="fa-solid fa-calendar-day"></i> <span id="modal-date"></span></span>
+        <span><i class="fa-solid fa-clock"></i> <span id="modal-time"></span></span>
+      </div>
+      <p class="modal-desc" id="modal-desc"></p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const STATIC_EVENTS = [
+    { id: 1, title: "Reforma Elétrica",       client: "João Carlos",  date: "2024-07-08", time: "08:00", duration: "03:00", desc: "Revisão completa da fiação da residência, troca de tomadas e quadro de disjuntores.", level: "dificil",  color: "#e74c3c" },
+    { id: 2, title: "Instalação de Tomadas",  client: "Fátima Soito", date: "2024-07-10", time: "14:00", duration: "01:30", desc: "Instalação de 6 tomadas no escritório no novo padrão ABNT.", level: "facil",    color: "#27ae60" },
+    { id: 3, title: "Inspeção Geral",         client: "Davi Alves",   date: "2024-07-15", time: "09:00", duration: "02:00", desc: "Vistoria técnica para adequação do imóvel ao laudo de segurança elétrica.", level: "medio",   color: "#f39c12" },
+    { id: 4, title: "Troca de Disjuntores",   client: "Ana Beatriz",  date: "2024-07-18", time: "10:30", duration: "01:00", desc: "Substituição dos disjuntores antigos por modelos mais seguros e eficientes.", level: "facil",   color: "#27ae60" },
+    { id: 5, title: "Rede Trifásica",         client: "J. C. Sauro",  date: "2024-07-23", time: "07:30", duration: "04:00", desc: "Instalação de rede trifásica para nova máquina industrial de grande porte.", level: "dificil", color: "#e74c3c" },
+    { id: 6, title: "Manutenção Preventiva",  client: "Carlos Melo",  date: "2024-07-26", time: "13:00", duration: "02:30", desc: "Manutenção preventiva semestral de toda a instalação elétrica do galpão.", level: "medio",   color: "#f39c12" },
+  ];
+
+  const LEVEL_LABELS = { facil: "Fácil", medio: "Médio", dificil: "Difícil" };
+  const LEVEL_COLORS = { facil: "#27ae60", medio: "#f39c12", dificil: "#e74c3c" };
+
+  const AGENDA_KEY    = 'profeed_agenda_events';
+  const COMPLETED_KEY = 'profeed_completed_services';
+
+  function loadEvents() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(AGENDA_KEY));
+      if (saved && saved.length) return saved;
+    } catch(e) {}
+    const events = STATIC_EVENTS.map(e => ({ ...e, color: LEVEL_COLORS[e.level] }));
+    saveEvents(events);
+    return events;
+  }
+
+  function saveEvents(arr) {
+    localStorage.setItem(AGENDA_KEY, JSON.stringify(arr));
+  }
+
+  function syncCompleted(events) {
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    let completed = [];
+    try { completed = JSON.parse(localStorage.getItem(COMPLETED_KEY)) || []; } catch(e) {}
+    const existingIds = new Set(completed.map(c => c.id));
+    events.forEach(ev => {
+      const evDate = new Date(ev.date);
+      if (evDate < today && !existingIds.has(ev.id)) {
+        completed.push({ ...ev, completedAt: ev.date });
+        existingIds.add(ev.id);
+      }
+    });
+    localStorage.setItem(COMPLETED_KEY, JSON.stringify(completed));
+  }
+
+  let EVENTS = loadEvents();
+  syncCompleted(EVENTS);
+
+  let currentYear = 2024, currentMonth = 6;
+  let selectedLevel = "facil";
+
+  const MONTHS_PT = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+
+  function renderCalendar() {
+    const label = document.getElementById('month-label');
+    label.textContent = `${MONTHS_PT[currentMonth].toUpperCase()} ${currentYear}`;
+
+    const grid = document.getElementById('calendar-grid');
+    grid.innerHTML = '';
+
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const startOffset = (firstDay === 0) ? 6 : firstDay - 1;
+
+    for (let i = 0; i < startOffset; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'cal-day empty';
+      grid.appendChild(empty);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const dayEvents = EVENTS.filter(e => e.date === dateStr);
+
+      const cell = document.createElement('div');
+      cell.className = 'cal-day';
+      if (dayEvents.length > 0) cell.classList.add('has-events');
+
+      cell.innerHTML = `<span class="day-num">${d}</span>`;
+
+      dayEvents.forEach(ev => {
+        const dot = document.createElement('div');
+        dot.className = 'event-dot';
+        dot.style.background = LEVEL_COLORS[ev.level];
+        dot.title = ev.title;
+        dot.textContent = ev.title.slice(0, 8);
+        dot.addEventListener('click', (e) => { e.stopPropagation(); openModal(ev); });
+        cell.appendChild(dot);
+      });
+
+      grid.appendChild(cell);
+    }
+  }
+
+  document.getElementById('prev-btn').addEventListener('click', () => {
+    currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderCalendar();
+  });
+  document.getElementById('next-btn').addEventListener('click', () => {
+    currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    renderCalendar();
+  });
+
+  function renderEventsList() {
+    const list = document.getElementById('events-list');
+    list.innerHTML = '';
+
+    const sorted = [...EVENTS].sort((a,b) => a.date.localeCompare(b.date));
+    sorted.forEach(ev => {
+      const today = new Date(); today.setHours(0,0,0,0);
+      const evDate = new Date(ev.date);
+      const isPast = evDate < today;
+      const item = document.createElement('div');
+      item.className = 'event-item' + (isPast ? ' past-event' : '');
+      item.innerHTML = `
+        <div class="event-item-color" style="background:${LEVEL_COLORS[ev.level]}"></div>
+        <div class="event-item-info">
+          <div class="event-item-title">${ev.title}${isPast ? ' <span class="done-tag">Concluído</span>' : ''}</div>
+          <div class="event-item-meta">
+            <span><i class="fa-solid fa-user-tie"></i> ${ev.client}</span>
+            <span><i class="fa-solid fa-calendar-day"></i> ${formatDate(ev.date)}</span>
+            <span><i class="fa-solid fa-clock"></i> ${ev.time}</span>
+          </div>
+        </div>
+        <span class="event-level-badge" style="background:${LEVEL_COLORS[ev.level]}">${LEVEL_LABELS[ev.level]}</span>
+      `;
+      item.addEventListener('click', () => openModal(ev));
+      list.appendChild(item);
+    });
+  }
+
+  function formatDate(str) {
+    const [y,m,d] = str.split('-');
+    return `${d}/${m}/${y}`;
+  }
+
+  function openModal(ev) {
+    document.getElementById('modal-level').textContent = LEVEL_LABELS[ev.level];
+    document.getElementById('modal-level').style.background = LEVEL_COLORS[ev.level];
+    document.getElementById('modal-title').textContent = ev.title;
+    document.getElementById('modal-client').textContent = ev.client;
+    document.getElementById('modal-date').textContent = formatDate(ev.date);
+    document.getElementById('modal-time').textContent = `${ev.time} (${ev.duration}h)`;
+    document.getElementById('modal-desc').textContent = ev.desc;
+    document.getElementById('modal-overlay').classList.add('active');
+  }
+
+  document.getElementById('modal-close').addEventListener('click', () => {
+    document.getElementById('modal-overlay').classList.remove('active');
+  });
+  document.getElementById('modal-overlay').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('modal-overlay'))
+      document.getElementById('modal-overlay').classList.remove('active');
+  });
+
+  const formBody = document.getElementById('form-body');
+
+  document.getElementById('open-form-btn').addEventListener('click', () => {
+    formBody.classList.toggle('open');
+  });
+  document.getElementById('cancel-btn').addEventListener('click', () => {
+    formBody.classList.remove('open');
+  });
+
+  document.querySelectorAll('.level-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedLevel = btn.dataset.level;
+    });
+  });
+
+  function calcEnd() {
+    const t = document.getElementById('f-time').value;
+    const dur = document.getElementById('f-duration').value;
+    if (!t || !dur) return;
+    const [th, tm] = t.split(':').map(Number);
+    const [dh, dm] = dur.split(':').map(Number);
+    const totalMin = th * 60 + tm + dh * 60 + (dm || 0);
+    const eh = Math.floor(totalMin / 60) % 24;
+    const em = totalMin % 60;
+    document.getElementById('f-end').value = `${String(eh).padStart(2,'0')}:${String(em).padStart(2,'0')}`;
+  }
+  document.getElementById('f-time').addEventListener('change', calcEnd);
+  document.getElementById('f-duration').addEventListener('input', calcEnd);
+
+  document.getElementById('confirm-btn').addEventListener('click', () => {
+    const title  = document.getElementById('f-title').value.trim();
+    const client = document.getElementById('f-client').value.trim();
+    const date   = document.getElementById('f-date').value;
+    const time   = document.getElementById('f-time').value;
+    const dur    = document.getElementById('f-duration').value;
+    const desc   = document.getElementById('f-desc').value.trim();
+
+    if (!title || !client || !date || !time) {
+      alert('Preencha título, cliente, data e horário.'); return;
+    }
+
+    const newEvent = {
+      id: Date.now(), title, client, date, time,
+      duration: dur || '01:00', desc, level: selectedLevel,
+      color: LEVEL_COLORS[selectedLevel]
+    };
+
+    EVENTS.push(newEvent);
+    saveEvents(EVENTS);
+    syncCompleted(EVENTS);
+
+    renderEventsList();
+    renderCalendar();
+    formBody.classList.remove('open');
+
+    ['f-title','f-client','f-desc','f-date','f-time','f-duration','f-end'].forEach(id => document.getElementById(id).value = '');
+  });
+
+  function toggleMenu() {
+    const menu = document.getElementById('dropdown-menu');
+    const btn  = document.getElementById('hamburger-btn');
+    menu.classList.toggle('active');
+    btn.classList.toggle('active');
+  }
+
+  renderCalendar();
+  renderEventsList();
+</script>
+
+</body>
+</html>

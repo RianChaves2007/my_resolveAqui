@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portifólio — Resolve Aqui</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assests/css/portifolio/portifolio.css" />
+  <script src="auth.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <svg class="nav-logo" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="22" cy="22" r="20" fill="#1b3a6a" stroke="#3a6aaa" stroke-width="2"/>
+    <path d="M13 22 L19 28 L31 16" stroke="#4da6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="22" cy="22" r="9" stroke="#4da6ff" stroke-width="1.5" fill="none" opacity="0.5"/>
+  </svg>
+
+  <div class="nav-icons">
+    <button class="nav-icon" onclick="location.href='index.html'" title="Início"><i class="fa-solid fa-house"></i></button>
+    <button class="nav-icon" onclick="void(0)" title="Favoritos"><i class="fa-solid fa-heart"></i></button>
+    <button class="nav-icon" onclick="location.href='mensagens.html'" title="Mensagens"><i class="fa-solid fa-envelope"></i></button>
+    <button class="nav-icon" onclick="void(0)" title="Notificações"><i class="fa-solid fa-rotate"></i></button>
+    <button class="nav-icon" onclick="void(0)" title="Comunidade"><i class="fa-solid fa-user-group"></i></button>
+  </div>
+
+  <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMenu()" title="Menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="dropdown-menu" id="dropdown-menu">
+    <button class="nav-icon dropdown-item" onclick="location.href='index.html'"><i class="fa-solid fa-house"></i> Início</button>
+    <button class="nav-icon dropdown-item" onclick="void(0)"><i class="fa-solid fa-heart"></i> Favoritos</button>
+    <button class="nav-icon dropdown-item" onclick="location.href='mensagens.html'"><i class="fa-solid fa-envelope"></i> Mensagens</button>
+    <button class="nav-icon dropdown-item" onclick="void(0)"><i class="fa-solid fa-rotate"></i> Notificações</button>
+    <button class="nav-icon dropdown-item" onclick="void(0)"><i class="fa-solid fa-user-group"></i> Comunidade</button>
+  </div>
+
+  <button class="nav-profile-btn" id="profile-toggle-btn" onclick="toggleProfile()" title="Perfil">
+    <i class="fa-solid fa-user"></i>
+  </button>
+</nav>
+
+<div class="page">
+  <p class="no-profile-msg" id="no-profile">Clique no ícone de perfil para ver as informações do profissional.</p>
+
+  <div id="profile-section">
+
+    <!-- PROFILE CARD -->
+    <div class="profile-card">
+      <div class="profile-left">
+        <div class="crown-wrapper crown-basic">
+          <svg viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="5,35 15,10 30,22 45,10 55,35" fill="none" stroke="#2d3748" stroke-width="3" stroke-linejoin="round"/>
+            <line x1="5" y1="35" x2="55" y2="35" stroke="#2d3748" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="5"  cy="35" r="4" fill="#2d3748"/>
+            <circle cx="30" cy="35" r="4" fill="#2d3748"/>
+            <circle cx="55" cy="35" r="4" fill="#2d3748"/>
+          </svg>
+        </div>
+        <div class="avatar-circle"><i class="fa-solid fa-user"></i></div>
+      </div>
+
+      <div class="profile-info">
+        <p class="plan-label">Plano básico</p>
+        <p class="profile-bio"><strong>Sobre:</strong> Meu nome é Romeu Lima, tenho 3 filhos e trabalho como eletricista desde 1990, tenho formação em engenharia elétrica e adoraria trabalhar para você.</p>
+        <p class="profile-cta">Acompanhe alguns trabalhos meus no portfólio.</p>
+      </div>
+
+      <div class="rating-panel">
+        <p class="rating-label">Média de avaliação</p>
+        <div class="rating-row">
+          <span class="rating-value" id="rating-display">4,25</span>
+          <div class="stars" id="stars-display"></div>
+        </div>
+        <button class="contact-btn" onclick="location.href='mensagens.html?user=Romeu+Lima&img=70&prof=Eletricista'">
+          Entre em contato com Romeu Lima
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="bottom-grid">
+
+      <!-- PORTFOLIO PANEL -->
+      <div class="panel panel-portfolio">
+        <div class="portfolio-panel-header">
+          <p class="panel-title" style="margin:0">Portifólio de trabalho</p>
+          <button class="criar-post-btn" id="open-post-modal-btn">
+            <i class="fa-solid fa-plus"></i> Criar Post
+          </button>
+        </div>
+
+        <div class="panel-body">
+          <div class="portfolio-posts-list" id="portfolio-posts-list"></div>
+          <div class="portfolio-grid-label">Galeria Rápida</div>
+          <div class="portfolio-grid" id="portfolio-grid"></div>
+          <button class="ver-mais-btn"><i class="fa-solid fa-circle-plus"></i> Ver mais</button>
+        </div>
+      </div>
+
+      <!-- PLANS -->
+      <div class="plans-wrapper">
+        <p class="plans-label">PLANOS DE DESTAQUE</p>
+        <div class="plans-cards">
+          <div class="plan-card silver">
+            <div class="plan-crown crown-silver">
+              <svg viewBox="0 0 52 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="4,30 14,8 26,18 38,8 48,30" fill="none" stroke="#5a6a80" stroke-width="2.5" stroke-linejoin="round"/>
+                <line x1="4" y1="30" x2="48" y2="30" stroke="#5a6a80" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="4"  cy="30" r="3" fill="#8090a8"/>
+                <circle cx="26" cy="30" r="3" fill="#8090a8"/>
+                <circle cx="48" cy="30" r="3" fill="#8090a8"/>
+              </svg>
+            </div>
+            <p class="plan-name">PLUS</p>
+            <p class="plan-desc">Destaque para profissionais com mais visibilidade na plataforma.</p>
+            <button class="plan-btn" onclick="event.stopPropagation()">Subscribe</button>
+          </div>
+          <div class="plan-card gold">
+            <div class="plan-crown crown-gold">
+              <svg viewBox="0 0 52 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="4,30 14,8 26,18 38,8 48,30" fill="none" stroke="#8a5c00" stroke-width="2.5" stroke-linejoin="round"/>
+                <line x1="4" y1="30" x2="48" y2="30" stroke="#8a5c00" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="4"  cy="30" r="3" fill="#c87c00"/>
+                <circle cx="26" cy="30" r="3" fill="#c87c00"/>
+                <circle cx="48" cy="30" r="3" fill="#c87c00"/>
+              </svg>
+            </div>
+            <p class="plan-name">PREMIUM</p>
+            <p class="plan-desc">O melhor plano para profissionais que querem se destacar ao máximo.</p>
+            <button class="plan-btn" onclick="event.stopPropagation()">Subscription</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVIEWS PANEL -->
+      <div class="panel panel-reviews">
+        <p class="panel-title">Avaliações do profissional</p>
+        <div class="panel-body" id="reviews-body" style="justify-content:flex-start; align-items:stretch;"></div>
+      </div>
+
+      <!-- EVENTS PANEL -->
+      <div class="panel panel-events">
+        <p class="panel-title">Próximos Eventos</p>
+        <div class="panel-body" id="events-body" style="justify-content:flex-start; align-items:stretch; padding:0;">
+          <div class="event-preview-item">
+            <span class="event-preview-bar" style="background:#e74c3c"></span>
+            <div class="event-preview-info">
+              <span class="event-preview-title">Reforma Elétrica</span>
+              <span class="event-preview-meta"><i class="fa-solid fa-user-tie"></i> João Carlos &nbsp;·&nbsp; <i class="fa-solid fa-calendar-day"></i> 08/07/2024</span>
+            </div>
+            <span class="event-preview-badge" style="background:#e74c3c">Difícil</span>
+          </div>
+          <div class="event-preview-item">
+            <span class="event-preview-bar" style="background:#f39c12"></span>
+            <div class="event-preview-info">
+              <span class="event-preview-title">Inspeção Geral</span>
+              <span class="event-preview-meta"><i class="fa-solid fa-user-tie"></i> Davi Alves &nbsp;·&nbsp; <i class="fa-solid fa-calendar-day"></i> 15/07/2024</span>
+            </div>
+            <span class="event-preview-badge" style="background:#f39c12">Médio</span>
+          </div>
+          <div class="event-preview-item">
+            <span class="event-preview-bar" style="background:#27ae60"></span>
+            <div class="event-preview-info">
+              <span class="event-preview-title">Troca de Disjuntores</span>
+              <span class="event-preview-meta"><i class="fa-solid fa-user-tie"></i> Ana Beatriz &nbsp;·&nbsp; <i class="fa-solid fa-calendar-day"></i> 18/07/2024</span>
+            </div>
+            <span class="event-preview-badge" style="background:#27ae60">Fácil</span>
+          </div>
+        </div>
+        <button class="ver-agenda-btn" onclick="location.href='agenda.html'">
+          <i class="fa-solid fa-calendar-days"></i> Ver agenda completa
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CRIAR POST -->
+<div class="post-modal-overlay" id="post-modal-overlay">
+  <div class="post-modal-card">
+    <div class="post-modal-header">
+      <span class="post-modal-title"><i class="fa-solid fa-pen-to-square"></i> Novo Post do Portfólio</span>
+      <button class="post-modal-close" id="close-post-modal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="post-modal-body">
+      <div class="pm-form-group">
+        <label>Imagem do Trabalho</label>
+        <div class="pm-img-upload-area" id="pm-img-area">
+          <div class="pm-img-placeholder" id="pm-img-placeholder">
+            <i class="fa-solid fa-image"></i>
+            <span>Clique para inserir URL de imagem</span>
+          </div>
+          <img id="pm-preview-img" class="pm-preview-img" style="display:none" src="" alt="preview" />
+          <input type="text" id="pm-img-url" placeholder="https://..." class="pm-img-url-input" />
+        </div>
+      </div>
+
+      <div class="pm-form-group">
+        <label>Descrição do trabalho</label>
+        <textarea id="pm-desc" placeholder="Descreva o serviço realizado..."></textarea>
+      </div>
+
+      <div class="pm-form-group">
+        <label>Marcar Cliente Atendido <span class="pm-label-sub">(opcional)</span></label>
+        <div class="pm-tag-input-wrap">
+          <span class="pm-at">@</span>
+          <input type="text" id="pm-client-tag" placeholder="Nome do cliente atendido" />
+        </div>
+        <p class="pm-tag-hint">O cliente receberá um lembrete para avaliar o serviço.</p>
+      </div>
+    </div>
+
+    <div class="post-modal-footer">
+      <button class="pm-btn-cancel" id="pm-cancel-btn">Cancelar</button>
+      <button class="pm-btn-publish" id="pm-publish-btn"><i class="fa-solid fa-paper-plane"></i> Publicar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const POSTS_KEY    = 'profeed_portfolio_posts';
+  const REVIEWS_KEY  = 'profeed_pending_reviews';
+  const GIVEN_KEY    = 'profeed_given_reviews';
+
+  /* ----------- helpers ----------- */
+  function loadPosts() {
+    try { return JSON.parse(localStorage.getItem(POSTS_KEY)) || []; } catch(e) { return []; }
+  }
+  function savePosts(arr) { localStorage.setItem(POSTS_KEY, JSON.stringify(arr)); }
+  function loadPendingReviews() {
+    try { return JSON.parse(localStorage.getItem(REVIEWS_KEY)) || []; } catch(e) { return []; }
+  }
+  function savePendingReviews(arr) { localStorage.setItem(REVIEWS_KEY, JSON.stringify(arr)); }
+  function loadGivenReviews() {
+    try { return JSON.parse(localStorage.getItem(GIVEN_KEY)) || []; } catch(e) { return []; }
+  }
+
+  /* ----------- stars ----------- */
+  function renderStars(val, total = 5) {
+    const container = document.getElementById('stars-display');
+    const display   = document.getElementById('rating-display');
+    container.innerHTML = '';
+    for (let i = 1; i <= total; i++) {
+      const s = document.createElement('span');
+      s.className = 'star ' + (i <= Math.floor(val) ? 'filled' : 'empty');
+      s.textContent = i <= Math.floor(val) ? '★' : '☆';
+      container.appendChild(s);
+    }
+    display.textContent = val.toFixed(2).replace('.', ',');
+  }
+
+  function starsHtml(n) {
+    let h = '';
+    for (let i = 1; i <= 5; i++) h += `<span class="pf-star ${i <= n ? 'filled' : ''}">${i <= n ? '★' : '☆'}</span>`;
+    return h;
+  }
+
+  /* ----------- portfolio image slots ----------- */
+  function renderPortfolioSlots(count = 6) {
+    const grid = document.getElementById('portfolio-grid');
+    grid.innerHTML = '';
+    const posts = loadPosts();
+    const imgs  = posts.filter(p => p.img).slice(0, count);
+    for (let i = 0; i < count; i++) {
+      const slot = document.createElement('div');
+      slot.className = 'portfolio-img-slot';
+      if (imgs[i]) {
+        slot.style.backgroundImage = `url('${imgs[i].img}')`;
+        slot.style.backgroundSize  = 'cover';
+        slot.style.backgroundPosition = 'center';
+      }
+      grid.appendChild(slot);
+    }
+  }
+
+  /* ----------- render reviews from givenReviews ----------- */
+  function renderReviews() {
+    const body = document.getElementById('reviews-body');
+    body.innerHTML = '';
+    const given = loadGivenReviews();
+    if (!given.length) {
+      body.innerHTML = '<p style="color:#5a7ab0;font-size:12px;text-align:center;padding:16px 0;">Nenhuma avaliação ainda.</p>';
+      return;
+    }
+    given.forEach(rv => {
+      const card = document.createElement('div');
+      card.className = 'pf-review-card';
+      card.innerHTML = `
+        <div class="pf-review-top">
+          <div class="pf-review-user">
+            ${rv.reviewerImg ? `<img class="pf-review-avatar" src="${rv.reviewerImg}" alt="${rv.reviewerName}">` : `<div class="pf-review-avatar-icon"><i class="fa-solid fa-user"></i></div>`}
+            <div>
+              <span class="pf-review-name">${rv.reviewerName}</span>
+              <span class="pf-review-date">${rv.date}</span>
+            </div>
+          </div>
+          <div class="pf-stars-row">${starsHtml(rv.stars)}</div>
+        </div>
+        <p class="pf-review-text">${rv.text}</p>
+        ${rv.img ? `<img class="pf-review-img" src="${rv.img}" alt="foto da avaliação">` : ''}
+      `;
+      body.appendChild(card);
+    });
+
+    /* recalc average rating */
+    const avg = given.reduce((s, r) => s + r.stars, 0) / given.length;
+    renderStars(avg);
+  }
+
+  /* ----------- render portfolio posts as cards ----------- */
+  function renderPortfolioPosts() {
+    const container = document.getElementById('portfolio-posts-list');
+    container.innerHTML = '';
+    const posts = loadPosts();
+    if (!posts.length) {
+      container.innerHTML = '<p class="pm-empty">Nenhum post publicado ainda. Clique em "Criar Post" para começar.</p>';
+      return;
+    }
+    posts.slice().reverse().forEach(post => {
+      const card = document.createElement('div');
+      card.className = 'pf-post-card';
+      card.innerHTML = `
+        <div class="pf-post-header">
+          <div class="pf-post-avatar-circle"><i class="fa-solid fa-user"></i></div>
+          <div class="pf-post-user-info">
+            <div class="pf-post-name">${post.providerName || 'Você'}</div>
+            <div class="pf-post-date">${post.date}</div>
+          </div>
+        </div>
+        ${post.img ? `<div class="pf-post-img-wrap"><img class="pf-post-img" src="${post.img}" alt="post"></div>` : ''}
+        <div class="pf-post-body">
+          <p class="pf-post-desc">${post.desc}</p>
+          ${post.taggedClient ? `<div class="pf-post-tag"><i class="fa-solid fa-tag"></i> @${post.taggedClient}</div>` : ''}
+        </div>
+        <div class="pf-post-actions">
+          <span class="pf-action"><i class="fa-regular fa-heart"></i> ${post.likes || 0}</span>
+          <span class="pf-action"><i class="fa-regular fa-comment"></i></span>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  /* ----------- toggle menu ----------- */
+  function toggleMenu() {
+    const menu = document.getElementById('dropdown-menu');
+    const btn  = document.getElementById('hamburger-btn');
+    menu.classList.toggle('active');
+    btn.classList.toggle('active');
+  }
+
+  function toggleProfile() {
+    const section = document.getElementById('profile-section');
+    const noMsg   = document.getElementById('no-profile');
+    const btn     = document.getElementById('profile-toggle-btn');
+    const isOpen  = section.classList.contains('visible');
+    section.classList.toggle('visible', !isOpen);
+    noMsg.style.display = isOpen ? 'block' : 'none';
+    btn.classList.toggle('active', !isOpen);
+  }
+
+  /* ----------- post modal ----------- */
+  const postModalOverlay = document.getElementById('post-modal-overlay');
+
+  document.getElementById('open-post-modal-btn').addEventListener('click', () => {
+    postModalOverlay.classList.add('active');
+  });
+  document.getElementById('close-post-modal').addEventListener('click', closePostModal);
+  document.getElementById('pm-cancel-btn').addEventListener('click', closePostModal);
+  postModalOverlay.addEventListener('click', e => { if (e.target === postModalOverlay) closePostModal(); });
+
+  function closePostModal() {
+    postModalOverlay.classList.remove('active');
+    document.getElementById('pm-img-url').value = '';
+    document.getElementById('pm-desc').value = '';
+    document.getElementById('pm-client-tag').value = '';
+    document.getElementById('pm-preview-img').style.display = 'none';
+    document.getElementById('pm-img-placeholder').style.display = 'flex';
+  }
+
+  /* live image preview */
+  document.getElementById('pm-img-url').addEventListener('input', function() {
+    const url = this.value.trim();
+    const preview = document.getElementById('pm-preview-img');
+    const placeholder = document.getElementById('pm-img-placeholder');
+    if (url) {
+      preview.src = url;
+      preview.style.display = 'block';
+      placeholder.style.display = 'none';
+    } else {
+      preview.style.display = 'none';
+      placeholder.style.display = 'flex';
+    }
+  });
+
+  document.getElementById('pm-publish-btn').addEventListener('click', () => {
+    const img         = document.getElementById('pm-img-url').value.trim();
+    const desc        = document.getElementById('pm-desc').value.trim();
+    const taggedClient = document.getElementById('pm-client-tag').value.trim();
+
+    if (!desc) { alert('Adicione uma descrição ao post.'); return; }
+
+    const user = typeof getUser === 'function' ? getUser() : null;
+    const providerName = user ? (user.nome || user.username) : 'Romeu Lima';
+
+    const now = new Date();
+    const dateStr = `${String(now.getDate()).padStart(2,'0')}/${String(now.getMonth()+1).padStart(2,'0')}/${now.getFullYear()}`;
+
+    const newPost = {
+      id: Date.now(),
+      providerName,
+      img,
+      desc,
+      taggedClient,
+      date: dateStr,
+      likes: 0
+    };
+
+    const posts = loadPosts();
+    posts.push(newPost);
+    savePosts(posts);
+
+    /* if client tagged, create pending review */
+    if (taggedClient) {
+      const pending = loadPendingReviews();
+      pending.push({
+        id: Date.now() + 1,
+        postId: newPost.id,
+        providerName,
+        postDesc: desc,
+        postImg: img,
+        taggedClient,
+        date: dateStr,
+        reviewed: false
+      });
+      savePendingReviews(pending);
+    }
+
+    renderPortfolioPosts();
+    renderPortfolioSlots();
+    closePostModal();
+  });
+
+  /* ----------- init ----------- */
+  renderStars(4.25);
+  renderPortfolioSlots(6);
+  renderPortfolioPosts();
+  renderReviews();
+  toggleProfile();
+</script>
+
+</body>
+</html>

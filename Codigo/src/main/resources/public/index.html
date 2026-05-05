@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resolve Aqui</title>
+  <link rel="stylesheet" href="/assests/css/index/index.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <input type="radio" name="panel" id="tab-home"      checked />
+  <input type="radio" name="panel" id="tab-likes"     />
+  <input type="radio" name="panel" id="tab-messages"  />
+  <input type="radio" name="panel" id="tab-history"   />
+  <input type="radio" name="panel" id="tab-completed" />
+  <input type="radio" name="panel" id="tab-avaliacoes"/>
+  <input type="radio" name="panel" id="tab-profile"   />
+  <input type="checkbox" id="layout-expanded" />
+  <input type="checkbox" id="toggle-panel" />
+
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <svg viewBox="0 0 44 44" width="44" height="44">
+        <circle cx="22" cy="22" r="20" fill="#1a2f6e" stroke="#00c853" stroke-width="2.5"/>
+        <path d="M14 22l6 6 10-12" stroke="#00c853" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="navbar-items">
+      <label for="tab-home" class="nav-item nav-home" title="Home">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </label>
+      <label for="tab-likes" class="nav-item nav-likes" title="Curtidas">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </label>
+      <label for="tab-messages" class="nav-item nav-messages" title="Mensagens">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </label>
+      <label for="tab-history" class="nav-item nav-history" title="Histórico">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+      </label>
+      <label for="tab-completed" class="nav-item nav-completed" title="Serviços Concluídos">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </label>
+      <label for="tab-avaliacoes" class="nav-item nav-avaliacoes" title="Avaliações Pendentes" id="nav-avaliacoes-label">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      </label>
+      <label for="tab-profile" class="nav-item nav-profile" title="Perfil">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </label>
+      <a id="nav-portfolio" class="nav-item nav-portfolio" href="portifolio.html" title="Meu Portfólio" style="display:none; text-decoration:none;">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+          <line x1="12" y1="12" x2="12" y2="16"/>
+          <line x1="10" y1="14" x2="14" y2="14"/>
+        </svg>
+      </a>
+      <button id="nav-auth-btn" class="nav-auth-btn" onclick="handleAuthClick()" title="Entrar"></button>
+      <label for="toggle-panel" class="nav-item nav-toggle-panel" title="Mostrar/Ocultar Painéis">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </label>
+    </div>
+  </nav>
+
+  <div class="layout">
+
+    <!-- FEED LEFT -->
+    <div class="left-panel">
+      <div class="feed">
+
+        <div class="post-card">
+          <div class="post-header">
+            <img class="post-avatar" src="https://i.pravatar.cc/150?img=47" alt="Sônia Borges">
+            <div class="post-user-info">
+              <div class="post-user-name">Sônia Borges</div>
+              <div class="post-user-profession">Artesã</div>
+            </div>
+            <span class="follow-btn">Seguir</span>
+          </div>
+          <div class="post-image-wrapper">
+            <img class="post-image" src="https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=600&q=80" alt="Publicação">
+          </div>
+          <div class="post-actions">
+            <div class="post-actions-left">
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>72</span>
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>3</span>
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+            </div>
+            <span class="save-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#555" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
+          </div>
+          <div class="contractor-review-section">
+            <div class="contractor-badge">⭐ Avaliação de Contratante</div>
+            <div class="contractor-review-card">
+              <img class="review-avatar" src="https://i.pravatar.cc/150?img=12" alt="Marco Souza">
+              <div class="review-content">
+                <div class="review-header">
+                  <span class="review-name">Marco Souza</span>
+                  <span class="review-role">Contratante</span>
+                  <div class="star-rating"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star">★</span></div>
+                </div>
+                <p class="review-text">Serviço excelente! Sônia entregou o trabalho no prazo e com qualidade impecável. Recomendo muito!</p>
+              </div>
+            </div>
+          </div>
+          <div class="comments-section">
+            <div class="comments-label">Comentários</div>
+            <div class="comments-list">
+              <div class="comment-item"><img class="comment-avatar" src="https://i.pravatar.cc/150?img=5" alt="Ana Lima"><div class="comment-bubble"><span class="comment-user">Ana Lima </span><span class="comment-text">Que trabalho lindo! Adorei os detalhes.</span></div></div>
+              <div class="comment-item"><img class="comment-avatar" src="https://i.pravatar.cc/150?img=8" alt="Carlos Melo"><div class="comment-bubble"><span class="comment-user">Carlos Melo </span><span class="comment-text">Incrível! Você tem muito talento.</span></div></div>
+            </div>
+            <input type="text" class="comment-input" placeholder="Deixe seu comentário...">
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post-header">
+            <img class="post-avatar" src="https://i.pravatar.cc/150?img=33" alt="Gean Felipe">
+            <div class="post-user-info">
+              <div class="post-user-name">Gean Felipe ⭐</div>
+              <div class="post-user-profession">Encanador</div>
+            </div>
+            <span class="follow-btn following">Seguindo ◆</span>
+          </div>
+          <div class="post-image-wrapper">
+            <img class="post-image" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Publicação">
+          </div>
+          <div class="post-actions">
+            <div class="post-actions-left">
+              <span class="action-btn liked"><svg viewBox="0 0 24 24" width="22" height="22" fill="#e53935" stroke="#e53935" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>24</span>
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>2</span>
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+            </div>
+            <span class="save-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#555" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
+          </div>
+          <div class="contractor-review-section">
+            <div class="contractor-badge">⭐ Avaliação de Contratante</div>
+            <div class="contractor-review-card">
+              <img class="review-avatar" src="https://i.pravatar.cc/150?img=15" alt="Roberto Alves">
+              <div class="review-content">
+                <div class="review-header">
+                  <span class="review-name">Roberto Alves</span>
+                  <span class="review-role">Contratante</span>
+                  <div class="star-rating"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span></div>
+                </div>
+                <p class="review-text">Gean resolveu o problema da tubulação rapidamente. Profissional pontual e muito caprichoso no serviço!</p>
+              </div>
+            </div>
+          </div>
+          <div class="comments-section">
+            <div class="comments-label">Comentários</div>
+            <div class="comments-list">
+              <div class="comment-item"><img class="comment-avatar" src="https://i.pravatar.cc/150?img=20" alt="Fernanda S."><div class="comment-bubble"><span class="comment-user">Fernanda S. </span><span class="comment-text">Salvou minha casa! Muito obrigada.</span></div></div>
+              <div class="comment-item"><img class="comment-avatar" src="https://i.pravatar.cc/150?img=22" alt="Diego P."><div class="comment-bubble"><span class="comment-user">Diego P. </span><span class="comment-text">Top demais o serviço!</span></div></div>
+            </div>
+            <input type="text" class="comment-input" placeholder="Deixe seu comentário...">
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post-header">
+            <img class="post-avatar" src="https://i.pravatar.cc/150?img=60" alt="Davi Alves">
+            <div class="post-user-info">
+              <div class="post-user-name">Davi Alves</div>
+              <div class="post-user-profession">Pedreiro</div>
+            </div>
+            <span class="follow-btn">Seguir</span>
+          </div>
+          <div class="post-image-wrapper">
+            <img class="post-image" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Publicação">
+          </div>
+          <div class="post-actions">
+            <div class="post-actions-left">
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>123</span>
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>18</span>
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+            </div>
+            <span class="save-btn saved"><svg viewBox="0 0 24 24" width="22" height="22" fill="#1a2f6e" stroke="#1a2f6e" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
+          </div>
+          <div class="contractor-review-section">
+            <div class="contractor-badge">⭐ Avaliação de Contratante</div>
+            <div class="contractor-review-card">
+              <img class="review-avatar" src="https://i.pravatar.cc/150?img=44" alt="Patricia Costa">
+              <div class="review-content">
+                <div class="review-header">
+                  <span class="review-name">Patricia Costa</span>
+                  <span class="review-role">Contratante</span>
+                  <div class="star-rating"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span></div>
+                </div>
+                <p class="review-text">Davi construiu meu muro com perfeição total. Serviço limpo, organizado e dentro do prazo!</p>
+              </div>
+            </div>
+          </div>
+          <div class="comments-section">
+            <div class="comments-label">Comentários</div>
+            <div class="comments-list">
+              <div class="comment-item"><img class="comment-avatar" src="https://i.pravatar.cc/150?img=30" alt="Lucas A."><div class="comment-bubble"><span class="comment-user">Lucas A. </span><span class="comment-text">Que acabamento perfeito! 🔥</span></div></div>
+              <div class="comment-item"><img class="comment-avatar" src="https://i.pravatar.cc/150?img=35" alt="Mariana B."><div class="comment-bubble"><span class="comment-user">Mariana B. </span><span class="comment-text">Profissional de verdade!</span></div></div>
+            </div>
+            <input type="text" class="comment-input" placeholder="Deixe seu comentário...">
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post-header">
+            <img class="post-avatar" src="https://i.pravatar.cc/150?img=49" alt="Fátima Soito">
+            <div class="post-user-info">
+              <div class="post-user-name">Fátima Soito ⭐</div>
+              <div class="post-user-profession">Cozinheira</div>
+            </div>
+            <span class="follow-btn">Seguir</span>
+          </div>
+          <div class="post-image-wrapper">
+            <img class="post-image" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Publicação">
+          </div>
+          <div class="post-actions">
+            <div class="post-actions-left">
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>87</span>
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>11</span>
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+            </div>
+            <span class="save-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#555" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
+          </div>
+          <div class="contractor-review-section">
+            <div class="contractor-badge">⭐ Avaliação de Contratante</div>
+            <div class="contractor-review-card">
+              <img class="review-avatar" src="https://i.pravatar.cc/150?img=18" alt="Henrique Lima">
+              <div class="review-content">
+                <div class="review-header">
+                  <span class="review-name">Henrique Lima</span>
+                  <span class="review-role">Contratante</span>
+                  <div class="star-rating"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star">★</span></div>
+                </div>
+                <p class="review-text">Fátima preparou um jantar maravilhoso para o evento da minha empresa. Todos os convidados adoraram!</p>
+              </div>
+            </div>
+          </div>
+          <div class="comments-section">
+            <div class="comments-label">Comentários</div>
+            <div class="comments-list">
+              <div class="comment-item"><img class="comment-avatar" src="https://i.pravatar.cc/150?img=25" alt="Sandra M."><div class="comment-bubble"><span class="comment-user">Sandra M. </span><span class="comment-text">Que prato lindo! Deve ser delicioso.</span></div></div>
+              <div class="comment-item"><img class="comment-avatar" src="https://i.pravatar.cc/150?img=27" alt="Rafael T."><div class="comment-bubble"><span class="comment-user">Rafael T. </span><span class="comment-text">Quero o contato dela!</span></div></div>
+            </div>
+            <input type="text" class="comment-input" placeholder="Deixe seu comentário...">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="right-panel-wrapper">
+      <div class="panel-controls">
+        <label for="layout-expanded" class="ctrl-btn expand-btn" title="Expandir / Recolher">
+          <svg class="icon-expand" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+            <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+          </svg>
+          <svg class="icon-collapse" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/>
+            <line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/>
+          </svg>
+        </label>
+      </div>
+
+      <!-- PAINEL: HOME -->
+      <div class="panel panel-home">
+        <h2 class="panel-title">Sugestões para você</h2>
+        <div class="list-item">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=47" alt="Sônia Borges">
+          <div class="list-info"><span class="list-name">Sônia Borges</span><span class="list-sub">Artesã</span></div>
+          <span class="btn-green">Seguir</span>
+        </div>
+        <div class="list-item">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=33" alt="Gean Felipe">
+          <div class="list-info"><span class="list-name">Gean Felipe ⭐</span><span class="list-sub">Encanador</span></div>
+          <span class="btn-green">Seguir</span>
+        </div>
+        <div class="list-item">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=60" alt="Davi Alves">
+          <div class="list-info"><span class="list-name">Davi Alves</span><span class="list-sub">Pedreiro</span></div>
+          <span class="btn-green">Seguir</span>
+        </div>
+        <div class="list-item">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=49" alt="Fátima Soito">
+          <div class="list-info"><span class="list-name">Fátima Soito ⭐</span><span class="list-sub">Cozinheira</span></div>
+          <span class="btn-green">Seguir</span>
+        </div>
+      </div>
+
+      <!-- PAINEL: CURTIDAS -->
+      <div class="panel panel-likes">
+        <h2 class="panel-title">❤️ Curtidas &amp; Salvos</h2>
+        <div class="liked-grid">
+          <div class="liked-post-card">
+            <div class="liked-post-img-wrap">
+              <img class="liked-post-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Gean Felipe">
+              <span class="liked-badge">❤️</span>
+            </div>
+            <div class="liked-post-info">
+              <img class="liked-post-avatar" src="https://i.pravatar.cc/150?img=33" alt="Gean Felipe">
+              <div class="liked-post-meta"><span class="liked-post-name">Gean Felipe ⭐</span><span class="liked-post-prof">Encanador</span></div>
+            </div>
+            <div class="liked-post-actions">
+              <span class="action-btn liked"><svg viewBox="0 0 24 24" width="18" height="18" fill="#e53935" stroke="#e53935" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>24</span>
+              <span class="save-btn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#555" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
+            </div>
+          </div>
+          <div class="liked-post-card">
+            <div class="liked-post-img-wrap">
+              <img class="liked-post-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=80" alt="Davi Alves">
+              <span class="liked-badge">🔖</span>
+            </div>
+            <div class="liked-post-info">
+              <img class="liked-post-avatar" src="https://i.pravatar.cc/150?img=60" alt="Davi Alves">
+              <div class="liked-post-meta"><span class="liked-post-name">Davi Alves</span><span class="liked-post-prof">Pedreiro</span></div>
+            </div>
+            <div class="liked-post-actions">
+              <span class="action-btn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>123</span>
+              <span class="save-btn saved"><svg viewBox="0 0 24 24" width="18" height="18" fill="#1a2f6e" stroke="#1a2f6e" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAINEL: MENSAGENS -->
+      <div class="panel panel-messages">
+        <h2 class="panel-title">✉️ Mensagens</h2>
+        <a class="list-item msg-link" href="mensagens.html?user=Davi+Alves&img=60&prof=Pedreiro">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=60" alt="Davi Alves">
+          <div class="list-info"><span class="list-name">Davi Alves</span><span class="list-sub">Olá, tudo bem? Pode me passar o orçamento?</span></div>
+          <div class="list-dot"></div>
+        </a>
+        <a class="list-item msg-link" href="mensagens.html?user=Gean+Felipe+%E2%AD%90&img=33&prof=Encanador">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=33" alt="Gean Felipe">
+          <div class="list-info"><span class="list-name">Gean Felipe ⭐</span><span class="list-sub">Serviço finalizado! Obrigado pela confiança.</span></div>
+          <div class="list-dot"></div>
+        </a>
+        <a class="list-item msg-link" href="mensagens.html?user=S%C3%B4nia+Borges&img=47&prof=Artesã">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=47" alt="Sônia Borges">
+          <div class="list-info"><span class="list-name">Sônia Borges</span><span class="list-sub">Oi! Tenho disponibilidade na próxima semana.</span></div>
+          <div class="list-dot"></div>
+        </a>
+        <a class="list-item msg-link" href="mensagens.html?user=F%C3%A1tima+Soito+%E2%AD%90&img=49&prof=Cozinheira">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=49" alt="Fátima Soito">
+          <div class="list-info"><span class="list-name">Fátima Soito ⭐</span><span class="list-sub">Cardápio para 30 pessoas ficaria R$ 950.</span></div>
+          <div class="list-dot"></div>
+        </a>
+      </div>
+
+      <!-- PAINEL: HISTÓRICO -->
+      <div class="panel panel-history">
+        <h2 class="panel-title">📋 Histórico de Serviços</h2>
+        <div class="list-item">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=47" alt="Sônia Borges">
+          <div class="list-info"><span class="list-name">Sônia Borges</span><span class="list-sub">Encomenda de peça artesanal</span></div>
+          <div class="history-right"><span class="status-badge status-done">Concluído</span><div class="star-rating"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star">★</span></div></div>
+        </div>
+        <div class="list-item">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=33" alt="Gean Felipe">
+          <div class="list-info"><span class="list-name">Gean Felipe ⭐</span><span class="list-sub">Reparo de vazamento</span></div>
+          <div class="history-right"><span class="status-badge status-done">Concluído</span><div class="star-rating"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span></div></div>
+        </div>
+        <div class="list-item">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=60" alt="Davi Alves">
+          <div class="list-info"><span class="list-name">Davi Alves</span><span class="list-sub">Construção de muro</span></div>
+          <div class="history-right"><span class="status-badge status-pending">Não concluído</span></div>
+        </div>
+        <div class="list-item">
+          <img class="list-avatar" src="https://i.pravatar.cc/150?img=49" alt="Fátima Soito">
+          <div class="list-info"><span class="list-name">Fátima Soito ⭐</span><span class="list-sub">Jantar para evento</span></div>
+          <div class="history-right"><span class="status-badge status-canceled">Cancelado</span></div>
+        </div>
+      </div>
+
+      <!-- PAINEL: SERVIÇOS CONCLUÍDOS -->
+      <div class="panel panel-completed">
+        <h2 class="panel-title">✅ Serviços Feitos</h2>
+        <div id="completed-list"></div>
+      </div>
+
+      <!-- PAINEL: AVALIAÇÕES PENDENTES -->
+      <div class="panel panel-avaliacoes">
+        <h2 class="panel-title">⭐ Lembretes de Avaliação</h2>
+        <div id="avaliacoes-list"></div>
+      </div>
+
+      <!-- PAINEL: PERFIL -->
+      <div class="panel panel-profile">
+        <h2 class="panel-title">👤 Meu Perfil</h2>
+        <div class="profile-card">
+          <img class="profile-big-avatar" id="profile-avatar" src="https://i.pravatar.cc/150?img=70" alt="Você">
+          <div class="profile-name" id="profile-name">Você</div>
+          <div id="profile-tipo-badge" class="profile-tipo-badge" style="display:none"></div>
+          <div class="profile-stats">
+            <div><strong>2</strong><span>Curtidos</span></div>
+            <div><strong>1</strong><span>Salvos</span></div>
+            <div><strong>0</strong><span>Posts</span></div>
+          </div>
+          <button id="btn-virar-prestador" class="btn-virar-prestador" onclick="location.href='cadastro-prestador.html'" style="display:none">
+            Quero ser prestador de serviço
+          </button>
+          <button id="btn-meu-portfolio" class="btn-meu-portfolio" onclick="location.href='portifolio.html'" style="display:none">
+            Ver meu portfólio
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- REVIEW MODAL -->
+  <div class="review-modal-overlay" id="review-modal-overlay">
+    <div class="review-modal-card">
+      <div class="review-modal-header">
+        <span class="review-modal-title">⭐ Avaliar Serviço</span>
+        <button class="review-modal-close" id="review-modal-close"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="review-modal-body">
+        <div class="rm-provider-info" id="rm-provider-info"></div>
+        <div class="rm-post-snippet" id="rm-post-snippet"></div>
+
+        <div class="rm-section-label">Sua avaliação</div>
+        <div class="rm-star-picker" id="rm-star-picker">
+          <span class="rm-star" data-v="1">★</span>
+          <span class="rm-star" data-v="2">★</span>
+          <span class="rm-star" data-v="3">★</span>
+          <span class="rm-star" data-v="4">★</span>
+          <span class="rm-star" data-v="5">★</span>
+        </div>
+
+        <div class="rm-form-group">
+          <label>Descreva o serviço</label>
+          <textarea id="rm-text" placeholder="Como foi a experiência? O profissional foi pontual, atencioso?"></textarea>
+        </div>
+
+        <div class="rm-form-group">
+          <label>Foto do serviço <span class="rm-optional">(opcional)</span></label>
+          <input type="text" id="rm-img-url" placeholder="URL da imagem..." />
+          <img id="rm-img-preview" class="rm-img-preview" style="display:none" src="" alt="preview" />
+        </div>
+      </div>
+      <div class="review-modal-footer">
+        <button class="rm-btn-cancel" id="rm-cancel-btn">Cancelar</button>
+        <button class="rm-btn-submit" id="rm-submit-btn"><i class="fa-solid fa-paper-plane"></i> Enviar Avaliação</button>
+      </div>
+    </div>
+  </div>
+
+<script src="/assests/js/auth/auth.js"></script>
+
+<script>
+	const token = localStorage.getItem('token');
+	
+	if (!token) {
+	    window.location.href = '/modulos/login.html';
+	}
+
+  const COMPLETED_KEY  = 'profeed_completed_services';
+  const REVIEWS_KEY    = 'profeed_pending_reviews';
+  const GIVEN_KEY      = 'profeed_given_reviews';
+  const LEVEL_COLORS   = { facil: "#27ae60", medio: "#f39c12", dificil: "#e74c3c" };
+  const LEVEL_LABELS   = { facil: "Fácil", medio: "Médio", dificil: "Difícil" };
+
+  /* ---- AUTH ---- */
+  (function() {
+    const user = getUser();
+    const authBtn      = document.getElementById('nav-auth-btn');
+    const portfolioLink = document.getElementById('nav-portfolio');
+    const profileName  = document.getElementById('profile-name');
+    const profileAvatar = document.getElementById('profile-avatar');
+    const tipoBadge    = document.getElementById('profile-tipo-badge');
+    const btnVirar     = document.getElementById('btn-virar-prestador');
+    const btnPortfolio = document.getElementById('btn-meu-portfolio');
+
+    if (user) {
+      authBtn.textContent = 'Sair';
+      authBtn.classList.add('auth-btn-logout');
+      profileName.textContent = user.nome || user.username;
+      if (user.foto) profileAvatar.src = user.foto;
+      tipoBadge.style.display = 'inline-block';
+      if (user.tipo === 'prestador') {
+        tipoBadge.textContent = 'Prestador';
+        tipoBadge.classList.add('badge-prestador');
+        portfolioLink.style.display = 'flex';
+        btnPortfolio.style.display = 'block';
+        btnVirar.style.display = 'none';
+      } else {
+        tipoBadge.textContent = 'Contratante';
+        tipoBadge.classList.add('badge-usuario');
+        portfolioLink.style.display = 'none';
+        btnPortfolio.style.display = 'none';
+        btnVirar.style.display = 'block';
+      }
+    } else {
+      authBtn.textContent = 'Entrar';
+      authBtn.classList.add('auth-btn-login');
+      profileName.textContent = 'Visitante';
+    }
+  })();
+
+  function handleAuthClick() {
+    const user = getUser();
+    if (user) { logout(); } else { window.location.href = 'login.html'; }
+  }
+
+  /* ---- COMPLETED SERVICES ---- */
+  function renderCompleted() {
+    const container = document.getElementById('completed-list');
+    let completed = [];
+    try { completed = JSON.parse(localStorage.getItem(COMPLETED_KEY)) || []; } catch(e) {}
+
+    if (!completed.length) {
+      container.innerHTML = '<p class="panel-empty-msg">Nenhum serviço concluído ainda. Os serviços com prazo vencido na agenda aparecerão aqui.</p>';
+      return;
+    }
+
+    container.innerHTML = '';
+    completed.slice().reverse().forEach(ev => {
+      const card = document.createElement('div');
+      card.className = 'completed-card';
+      card.innerHTML = `
+        <div class="completed-card-bar" style="background:${LEVEL_COLORS[ev.level] || '#27ae60'}"></div>
+        <div class="completed-card-body">
+          <div class="completed-card-top">
+            <span class="completed-card-title">${ev.title}</span>
+            <span class="completed-level-badge" style="background:${LEVEL_COLORS[ev.level] || '#27ae60'}">${LEVEL_LABELS[ev.level] || ev.level}</span>
+          </div>
+          <div class="completed-card-meta">
+            <span><i class="fa-solid fa-user-tie"></i> ${ev.client}</span>
+            <span><i class="fa-solid fa-calendar-check"></i> ${formatDate(ev.date)}</span>
+            <span><i class="fa-solid fa-clock"></i> ${ev.time}</span>
+          </div>
+          ${ev.desc ? `<p class="completed-card-desc">${ev.desc}</p>` : ''}
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function formatDate(str) {
+    if (!str) return '';
+    const [y,m,d] = str.split('-');
+    return `${d}/${m}/${y}`;
+  }
+
+  /* ---- PENDING REVIEWS ---- */
+  let currentReviewId = null;
+  let selectedStars   = 0;
+
+  function renderAvaliacoes() {
+    const container = document.getElementById('avaliacoes-list');
+    let pending = [];
+    try { pending = JSON.parse(localStorage.getItem(REVIEWS_KEY)) || []; } catch(e) {}
+
+    const unreviewed = pending.filter(p => !p.reviewed);
+
+    if (!unreviewed.length) {
+      container.innerHTML = '<p class="panel-empty-msg">Nenhuma avaliação pendente. Quando um prestador marcar você em um post, aparecerá aqui.</p>';
+      return;
+    }
+
+    container.innerHTML = '';
+    unreviewed.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'aval-card';
+      card.innerHTML = `
+        <div class="aval-card-top">
+          <div class="aval-card-icon"><i class="fa-solid fa-tag"></i></div>
+          <div class="aval-card-info">
+            <span class="aval-card-provider">Você foi marcado por <strong>${item.providerName}</strong></span>
+            <span class="aval-card-date">${item.date}</span>
+          </div>
+        </div>
+        ${item.postImg ? `<img class="aval-post-img" src="${item.postImg}" alt="post">` : ''}
+        ${item.postDesc ? `<p class="aval-post-desc">"${item.postDesc}"</p>` : ''}
+        <button class="aval-avaliar-btn" data-id="${item.id}">
+          <i class="fa-solid fa-star"></i> Avaliar este serviço
+        </button>
+      `;
+      card.querySelector('.aval-avaliar-btn').addEventListener('click', () => openReviewModal(item));
+      container.appendChild(card);
+    });
+  }
+
+  /* ---- REVIEW MODAL ---- */
+  function openReviewModal(item) {
+    currentReviewId = item.id;
+    selectedStars   = 0;
+    updateStarPicker(0);
+
+    document.getElementById('rm-provider-info').innerHTML = `
+      <i class="fa-solid fa-user-circle rm-provider-icon"></i>
+      <div><strong>${item.providerName}</strong><br><span class="rm-provider-sub">Prestador de serviço</span></div>
+    `;
+    document.getElementById('rm-post-snippet').innerHTML = item.postDesc
+      ? `<p class="rm-post-desc">"${item.postDesc}"</p>`
+      : '';
+
+    document.getElementById('rm-text').value = '';
+    document.getElementById('rm-img-url').value = '';
+    document.getElementById('rm-img-preview').style.display = 'none';
+    document.getElementById('review-modal-overlay').classList.add('active');
+  }
+
+  function closeReviewModal() {
+    document.getElementById('review-modal-overlay').classList.remove('active');
+    currentReviewId = null;
+  }
+
+  document.getElementById('review-modal-close').addEventListener('click', closeReviewModal);
+  document.getElementById('rm-cancel-btn').addEventListener('click', closeReviewModal);
+  document.getElementById('review-modal-overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('review-modal-overlay')) closeReviewModal();
+  });
+
+  function updateStarPicker(val) {
+    document.querySelectorAll('.rm-star').forEach(s => {
+      s.classList.toggle('active', parseInt(s.dataset.v) <= val);
+    });
+  }
+
+  document.querySelectorAll('.rm-star').forEach(s => {
+    s.addEventListener('click', () => {
+      selectedStars = parseInt(s.dataset.v);
+      updateStarPicker(selectedStars);
+    });
+    s.addEventListener('mouseover', () => updateStarPicker(parseInt(s.dataset.v)));
+    s.addEventListener('mouseout', () => updateStarPicker(selectedStars));
+  });
+
+  document.getElementById('rm-img-url').addEventListener('input', function() {
+    const url = this.value.trim();
+    const preview = document.getElementById('rm-img-preview');
+    preview.src = url;
+    preview.style.display = url ? 'block' : 'none';
+  });
+
+  document.getElementById('rm-submit-btn').addEventListener('click', () => {
+    if (!selectedStars) { alert('Selecione pelo menos 1 estrela.'); return; }
+    const text = document.getElementById('rm-text').value.trim();
+    const img  = document.getElementById('rm-img-url').value.trim();
+    if (!text) { alert('Escreva uma descrição do serviço.'); return; }
+
+    const user = typeof getUser === 'function' ? getUser() : null;
+    const reviewerName = user ? (user.nome || user.username) : 'Contratante';
+    const reviewerImg  = user ? user.foto : null;
+
+    const now = new Date();
+    const dateStr = `${String(now.getDate()).padStart(2,'0')}/${String(now.getMonth()+1).padStart(2,'0')}/${now.getFullYear()}`;
+
+    const newReview = { id: Date.now(), reviewerName, reviewerImg, stars: selectedStars, text, img: img || null, date: dateStr };
+
+    let given = [];
+    try { given = JSON.parse(localStorage.getItem(GIVEN_KEY)) || []; } catch(e) {}
+    given.push(newReview);
+    localStorage.setItem(GIVEN_KEY, JSON.stringify(given));
+
+    let pending = [];
+    try { pending = JSON.parse(localStorage.getItem(REVIEWS_KEY)) || []; } catch(e) {}
+    const idx = pending.findIndex(p => p.id === currentReviewId);
+    if (idx !== -1) pending[idx].reviewed = true;
+    localStorage.setItem(REVIEWS_KEY, JSON.stringify(pending));
+
+    closeReviewModal();
+    renderAvaliacoes();
+    alert('Avaliação enviada com sucesso!');
+  });
+
+  /* ---- INIT ---- */
+  renderCompleted();
+  renderAvaliacoes();
+</script>
+</body>
+</html>
