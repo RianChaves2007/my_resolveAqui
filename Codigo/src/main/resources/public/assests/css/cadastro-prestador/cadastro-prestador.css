@@ -203,6 +203,14 @@ select.field-input-light {
   font-size: 13px;
 }
 
+/* ===== TEXTAREA ===== */
+.field-textarea {
+  resize: vertical;
+  min-height: 72px;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
 @media (max-width: 720px) {
   .page { flex-direction: column; }
   .panel-left, .panel-right { flex: none; width: 100%; }

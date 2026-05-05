@@ -5,15 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro Profissional — Resolve Aqui</title>
   <link rel="stylesheet" href="../assests/css/cadastro-prestador/cadastro-prestador.css" />
-  <script src="auth.js"></script>
 </head>
 <body>
 
 <div class="page">
 
-  <!-- PAINEL ESQUERDO: dados básicos (fundo escuro) -->
+  <!-- ═══════════════════════════════════════════════════════════════
+       PAINEL ESQUERDO — dados de acesso (fundo escuro)
+  ═══════════════════════════════════════════════════════════════ -->
   <div class="panel-left">
-    <button class="back-btn" onclick="location.href='cadastro.html'" title="Voltar">
+
+    <button class="back-btn" onclick="location.href='/modulos/cadastro.html'" title="Voltar">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#00c853" stroke-width="2.5">
         <circle cx="12" cy="12" r="10"/>
         <polyline points="12 8 8 12 12 16"/>
@@ -24,26 +26,33 @@
     <div id="error-msg" class="error-msg" style="display:none"></div>
 
     <div class="field-group">
-      <label class="field-label">Usuário</label>
-      <input class="field-input" id="inp-user" type="text" placeholder="Insira seu nome de usuário" autocomplete="username">
-    </div>
-
-    <div class="field-group">
       <label class="field-label">Nome Completo</label>
-      <input class="field-input" id="inp-nome" type="text" placeholder="Insira seu nome completo" autocomplete="name">
+      <input class="field-input" id="inp-nome" type="text"
+             placeholder="Insira seu nome completo" autocomplete="name">
     </div>
 
     <div class="field-group">
       <label class="field-label">Email</label>
-      <input class="field-input" id="inp-email" type="email" placeholder="Insira seu email" autocomplete="email">
+      <input class="field-input" id="inp-email" type="email"
+             placeholder="Insira seu email" autocomplete="email">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Telefone</label>
+      <input class="field-input" id="inp-telefone" type="tel"
+             placeholder="(00) 00000-0000" autocomplete="tel">
     </div>
 
     <div class="field-group">
       <label class="field-label">Senha</label>
       <div class="input-pw-wrap">
-        <input class="field-input" id="inp-pw" type="password" placeholder="Insira sua senha de acesso" autocomplete="new-password">
-        <button class="toggle-pw" type="button" onclick="togglePw('inp-pw', this)">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <input class="field-input" id="inp-pw" type="password"
+               placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+        <button class="toggle-pw" type="button" onclick="togglePw('inp-pw', this)" aria-label="Mostrar senha">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
         </button>
       </div>
     </div>
@@ -51,26 +60,79 @@
     <div class="field-group">
       <label class="field-label">Confirmação de senha</label>
       <div class="input-pw-wrap">
-        <input class="field-input" id="inp-pw2" type="password" placeholder="Confirme sua senha" autocomplete="new-password">
-        <button class="toggle-pw" type="button" onclick="togglePw('inp-pw2', this)">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <input class="field-input" id="inp-pw2" type="password"
+               placeholder="Repita a senha" autocomplete="new-password">
+        <button class="toggle-pw" type="button" onclick="togglePw('inp-pw2', this)" aria-label="Mostrar senha">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
         </button>
       </div>
     </div>
 
     <button class="btn-primary" onclick="doRegister()">Registrar</button>
+
   </div>
 
-  <!-- PAINEL DIREITO: dados profissionais (fundo claro) -->
+  <!-- ═══════════════════════════════════════════════════════════════
+       PAINEL DIREITO — dados profissionais (fundo claro)
+  ═══════════════════════════════════════════════════════════════ -->
   <div class="panel-right">
-    <div class="field-group">
-      <label class="field-label-light">Informe seu CPF</label>
-      <input class="field-input-light" id="inp-cpf" type="text" placeholder="000.000.000-00" maxlength="14">
+
+    <!-- Foto de perfil -->
+    <div class="photo-row">
+      <label class="photo-btn" for="inp-foto">
+        <input type="file" id="inp-foto" accept="image/*"
+               style="display:none" onchange="previewFoto(this)">
+        <div class="photo-circle" id="foto-preview">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none"
+               stroke="rgba(255,255,255,0.8)" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          <img id="foto-img" src="" alt=""
+               style="display:none; width:100%; height:100%; object-fit:cover; border-radius:50%;">
+        </div>
+      </label>
+      <p class="photo-hint">Adicione uma foto de perfil para os clientes identificarem você</p>
     </div>
 
+    <!-- Descrição profissional -->
     <div class="field-group">
-      <label class="field-label-light">Informe seu CEP</label>
-      <input class="field-input-light" id="inp-cep" type="text" placeholder="00000-000" maxlength="9">
+      <label class="field-label-light">Descrição profissional</label>
+      <textarea class="field-input-light field-textarea" id="inp-descricao"
+                placeholder="Descreva seus serviços, experiência e diferenciais..." rows="3"></textarea>
+    </div>
+
+    <!-- Área de atuação e Categoria (selects populados pela API) -->
+    <div class="field-row">
+      <div class="field-group" style="flex:1">
+        <label class="field-label-light">Área de atuação</label>
+        <select class="field-input-light" id="inp-area">
+          <option value="">Carregando...</option>
+        </select>
+      </div>
+      <div class="field-group" style="flex:1">
+        <label class="field-label-light">Categoria</label>
+        <select class="field-input-light" id="inp-categoria">
+          <option value="">Carregando...</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Endereço -->
+    <div class="field-row">
+      <div class="field-group" style="flex:1">
+        <label class="field-label-light">CPF</label>
+        <input class="field-input-light" id="inp-cpf" type="text"
+               placeholder="000.000.000-00" maxlength="14">
+      </div>
+      <div class="field-group" style="flex:1">
+        <label class="field-label-light">CEP</label>
+        <input class="field-input-light" id="inp-cep" type="text"
+               placeholder="00000-000" maxlength="9">
+      </div>
     </div>
 
     <div class="field-row">
@@ -78,7 +140,7 @@
         <label class="field-label-light">Endereço</label>
         <input class="field-input-light" id="inp-end" type="text" placeholder="Rua / Av.">
       </div>
-      <div class="field-group" style="flex:1">
+      <div class="field-group" style="flex:0 0 80px">
         <label class="field-label-light">N°</label>
         <input class="field-input-light" id="inp-num" type="text" placeholder="000">
       </div>
@@ -89,7 +151,7 @@
         <label class="field-label-light">Cidade</label>
         <input class="field-input-light" id="inp-cidade" type="text" placeholder="Sua cidade">
       </div>
-      <div class="field-group" style="flex:0 0 100px">
+      <div class="field-group" style="flex:0 0 90px">
         <label class="field-label-light">Estado</label>
         <select class="field-input-light" id="inp-estado">
           <option value="">UF</option>
@@ -104,184 +166,10 @@
       </div>
     </div>
 
-    <div class="field-group">
-      <label class="field-label-light">Áreas de atuação</label>
-      <input class="field-input-light" id="inp-areas" type="text" placeholder="Ex: Encanamento, Elétrica, Pintura...">
-    </div>
-
-    <div class="photo-row">
-      <label class="photo-btn" for="inp-foto">
-        <input type="file" id="inp-foto" accept="image/*" style="display:none" onchange="previewFoto(this)">
-        <div class="photo-circle" id="foto-preview">
-          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-          </svg>
-          <img id="foto-img" src="" alt="" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:50%;">
-        </div>
-      </label>
-      <p class="photo-hint">Precisamos de uma foto de perfil para identificarmos quem você é</p>
-    </div>
-
-    <div id="finish-hint" class="finish-hint" style="display:none">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Conclua seu cadastro
-    </div>
   </div>
-
 </div>
 
-<script>
-  const _currentUser = getUser();
-  if (_currentUser && _currentUser.tipo === 'prestador') {
-    window.location.href = 'index.html';
-  }
-
-  const temp = JSON.parse(sessionStorage.getItem('profeed_reg_temp') || '{}');
-
-  if (_currentUser) {
-    document.getElementById('inp-user').value = _currentUser.username;
-    document.getElementById('inp-nome').value = _currentUser.nome;
-    document.getElementById('inp-email').value = _currentUser.email;
-    document.getElementById('inp-user').readOnly = true;
-    document.getElementById('inp-nome').readOnly = true;
-    document.getElementById('inp-email').readOnly = true;
-  } else if (temp.username) {
-    document.getElementById('inp-user').value = temp.username;
-    document.getElementById('inp-nome').value = temp.nome;
-    document.getElementById('inp-email').value = temp.email;
-    document.getElementById('inp-pw').value = temp.password;
-    document.getElementById('inp-pw2').value = temp.password;
-  }
-
-  function togglePw(id, btn) {
-    const inp = document.getElementById(id);
-    const isHidden = inp.type === 'password';
-    inp.type = isHidden ? 'text' : 'password';
-    btn.querySelector('svg').style.opacity = isHidden ? '0.5' : '1';
-  }
-
-  function maskCPF(el) {
-    let v = el.value.replace(/\D/g, '').slice(0, 11);
-    v = v.replace(/(\d{3})(\d)/, '$1.$2');
-    v = v.replace(/(\d{3})(\d)/, '$1.$2');
-    v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    el.value = v;
-  }
-
-  function maskCEP(el) {
-    let v = el.value.replace(/\D/g, '').slice(0, 8);
-    v = v.replace(/(\d{5})(\d)/, '$1-$2');
-    el.value = v;
-  }
-
-  document.getElementById('inp-cpf').addEventListener('input', function() { maskCPF(this); });
-  document.getElementById('inp-cep').addEventListener('input', function() { maskCEP(this); });
-
-  let fotoBase64 = '';
-  function previewFoto(input) {
-    const file = input.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      fotoBase64 = e.target.result;
-      const img = document.getElementById('foto-img');
-      img.src = fotoBase64;
-      img.style.display = 'block';
-      document.querySelector('.photo-circle svg').style.display = 'none';
-    };
-    reader.readAsDataURL(file);
-  }
-
-  function doRegister() {
-    const username = document.getElementById('inp-user').value.trim();
-    const nome = document.getElementById('inp-nome').value.trim();
-    const email = document.getElementById('inp-email').value.trim();
-    const password = document.getElementById('inp-pw').value;
-    const password2 = document.getElementById('inp-pw2').value;
-    const cpf = document.getElementById('inp-cpf').value.trim();
-    const cep = document.getElementById('inp-cep').value.trim();
-    const end = document.getElementById('inp-end').value.trim();
-    const num = document.getElementById('inp-num').value.trim();
-    const cidade = document.getElementById('inp-cidade').value.trim();
-    const estado = document.getElementById('inp-estado').value;
-    const areas = document.getElementById('inp-areas').value.trim();
-    const errEl = document.getElementById('error-msg');
-    const hintEl = document.getElementById('finish-hint');
-
-    if (!username || !nome || !email) {
-      errEl.textContent = 'Preencha todos os campos básicos.';
-      errEl.style.display = 'block';
-      return;
-    }
-
-    if (!_currentUser) {
-      if (!password || !password2) {
-        errEl.textContent = 'Preencha a senha.';
-        errEl.style.display = 'block';
-        return;
-      }
-      if (password !== password2) {
-        errEl.textContent = 'As senhas não coincidem.';
-        errEl.style.display = 'block';
-        return;
-      }
-      if (password.length < 6) {
-        errEl.textContent = 'A senha deve ter pelo menos 6 caracteres.';
-        errEl.style.display = 'block';
-        return;
-      }
-    }
-
-    if (!cpf || !cep || !end || !cidade || !estado || !areas) {
-      hintEl.style.display = 'flex';
-      errEl.textContent = 'Preencha todos os dados profissionais.';
-      errEl.style.display = 'block';
-      return;
-    }
-
-    errEl.style.display = 'none';
-    hintEl.style.display = 'none';
-
-    const users = JSON.parse(localStorage.getItem('profeed_users') || '[]');
-
-    if (_currentUser) {
-      const idx = users.findIndex(u => u.username === _currentUser.username);
-      const extra = { tipo: 'prestador', foto: fotoBase64 || _currentUser.foto, cpf, cep, endereco: end, numero: num, cidade, estado, areas };
-      if (idx >= 0) {
-        users[idx] = Object.assign(users[idx], extra);
-      }
-      localStorage.setItem('profeed_users', JSON.stringify(users));
-      setUser(Object.assign({}, _currentUser, extra));
-      window.location.href = 'index.html';
-      return;
-    }
-
-    if (users.find(u => u.username === username)) {
-      errEl.textContent = 'Este nome de usuário já está em uso.';
-      errEl.style.display = 'block';
-      return;
-    }
-
-    if (users.find(u => u.email === email)) {
-      errEl.textContent = 'Este e-mail já está cadastrado.';
-      errEl.style.display = 'block';
-      return;
-    }
-
-    const newUser = {
-      username, nome, email, password,
-      tipo: 'prestador',
-      foto: fotoBase64,
-      cpf, cep, endereco: end, numero: num, cidade, estado, areas
-    };
-
-    users.push(newUser);
-    localStorage.setItem('profeed_users', JSON.stringify(users));
-    sessionStorage.removeItem('profeed_reg_temp');
-
-    setUser({ username, nome, email, tipo: 'prestador', foto: fotoBase64 });
-    window.location.href = 'index.html';
-  }
-</script>
+<script src="/assests/js/auth/auth.js"></script>
+<script src="/assests/js/cadastro-prestador/cadastro-prestador.js"></script>
 </body>
 </html>

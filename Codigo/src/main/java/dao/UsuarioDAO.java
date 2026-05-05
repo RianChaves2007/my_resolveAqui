@@ -16,7 +16,7 @@ public class UsuarioDAO extends DAO {
     }
 
     public boolean inserir(UsuarioDTO dto) {
-        String sql = "INSERT INTO usuario (nome, email, senha, local, telefone, foto, tipoUsuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario (nome, email, senha, local, telefone, foto, tipousuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement st = conexao.prepareStatement(sql);
@@ -35,6 +35,39 @@ public class UsuarioDAO extends DAO {
             System.err.println("Erro ao inserir: " + e.getMessage());
             return false;
         }
+    }
+
+    /**
+     * Insere um novo usuário e retorna o ID gerado automaticamente.
+     * Utilizado pelo PrestadorService para encadear a criação de Prestador.
+     *
+     * @return ID gerado (>= 1) ou -1 em caso de erro
+     */
+    public int inserirRetornandoId(UsuarioDTO dto) {
+        String sql = "INSERT INTO usuario (nome, email, senha, local, telefone, foto, tipousuario) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING idusuario";
+
+        try {
+            PreparedStatement st = conexao.prepareStatement(sql);
+            st.setString(1, dto.getNome());
+            st.setString(2, dto.getEmail());
+            st.setString(3, dto.getSenha());
+            st.setString(4, dto.getLocal());
+            st.setString(5, dto.getTelefone());
+            st.setString(6, null);
+            st.setString(7, dto.getTipoUsuario());
+
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("idusuario");
+                st.close();
+                return id;
+            }
+            st.close();
+        } catch (SQLException e) {
+            System.err.println("Erro ao inserir usuário (retornando id): " + e.getMessage());
+        }
+        return -1;
     }
 
     public UsuarioDTO login(LoginDTO loginDTO) {

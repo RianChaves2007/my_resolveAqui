@@ -1,36 +1,43 @@
 package dao;
 
+import responseDTO.PrestadorDTO;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
-import responseDTO.UsuarioDTO;
+/**
+ * DAO responsável pelas operações na tabela Prestador.
+ * Herda de DAO (conexão base) — não herda de UsuarioDAO,
+ * pois Prestador e Usuario são entidades distintas no banco.
+ */
+public class PrestadorDAO extends DAO {
 
-public class PrestadorDAO extends UsuarioDAO{
-    
-    public PrestadorDAO(){
+    public PrestadorDAO() {
         super();
         conectar();
     }
 
-    public boolean inserir(UsuarioDTO dto) {
-        String sql = "INSERT INTO prestador (nome, email, senha, local, telefone, foto, tipoUsuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    /**
+     * Insere um novo registro na tabela Prestador vinculado ao usuário já criado.
+     *
+     * @param idUsuario ID do usuário recém-cadastrado em Usuario
+     * @param dto       dados específicos do prestador
+     * @return true em caso de sucesso, false em caso de erro
+     */
+    public boolean inserir(int idUsuario, PrestadorDTO dto) {
+        String sql = "INSERT INTO prestador (id_usuario, descricao, areaatuacao, categoria) "
+                   + "VALUES (?, ?, ?, ?)";
 
         try {
             PreparedStatement st = conexao.prepareStatement(sql);
-            st.setString(1, dto.getNome());
-            st.setString(2, dto.getEmail());
-            st.setString(3, dto.getSenha());
-            st.setString(4, dto.getLocal());
-            st.setString(5, dto.getTelefone());
-            st.setString(6, null);
-            st.setString(7, dto.getTipoUsuario());
+            st.setInt(1, idUsuario);
+            st.setString(2, dto.getDescricao());
+            st.setInt(3, dto.getAreaAtuacao());
+            st.setInt(4, dto.getCategoria());
 
             st.executeUpdate();
             st.close();
             return true;
         } catch (SQLException e) {
-            System.err.println("Erro ao inserir: " + e.getMessage());
+            System.err.println("Erro ao inserir prestador: " + e.getMessage());
             return false;
         }
     }

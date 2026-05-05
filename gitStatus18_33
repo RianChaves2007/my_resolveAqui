@@ -1,0 +1,35 @@
+PS C:\Users\conta\OneDrive\Documentos\GitHub\plmg-cc-ti2-2026-1-g08-ResolveAqui> git status
+On branch rianchpm
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   Codigo/.classpath
+        modified:   Codigo/.project
+        modified:   Codigo/.settings/org.eclipse.jdt.core.prefs
+        modified:   Codigo/src/main/java/app/Aplicacao.java
+        modified:   Codigo/src/main/java/dao/DAO.java
+        modified:   Codigo/src/main/java/dao/UsuarioDAO.java
+        modified:   Codigo/src/main/java/util/JwtUtil.java
+        modified:   Codigo/src/main/resources/dump.sql
+        modified:   Codigo/src/main/resources/public/assests/css/cadastro-prestador/cadastro-prestador.css
+        modified:   Codigo/src/main/resources/public/assests/js/auth/auth.js
+        modified:   Codigo/src/main/resources/public/modulos/cadastro-prestador.html
+        deleted:    Codigo/target/classes/META-INF/MANIFEST.MF
+        deleted:    Codigo/target/classes/META-INF/maven/com.main/app/pom.properties
+        deleted:    Codigo/target/classes/META-INF/maven/com.main/app/pom.xml
+        modified:   Codigo/target/classes/app/Aplicacao.class
+        modified:   Codigo/target/classes/dao/DAO.class
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        Codigo/.settings/org.eclipse.jdt.apt.core.prefs
+        Codigo/src/main/java/dao/AreaTipoDAO.java
+        Codigo/src/main/java/dao/PrestadorDAO.java
+        Codigo/src/main/java/model/Prestador.java
+        Codigo/src/main/java/responseDTO/PrestadorDTO.java
+        Codigo/src/main/java/service/PrestadorService.java
+        Codigo/src/main/resources/public/assests/js/cadastro-prestador/
+        FLUXO_PROGRAMA.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\conta\OneDrive\Documentos\GitHub\plmg-cc-ti2-2026-1-g08-ResolveAqui> 
